@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import Navbar from './client/components/Navbar';
 import './style.css';
 import ParameterContainer from './client/components/ParameterContainer';
 import GraphsContainer from './client/components/GraphsContainer';
 import RestartedPodTable from './client/components/RestartedPodTable';
-import fullLogo from './client/assets/fullLogo.png';
+import halfLogo from './client/assets/halfLogo.png';
 
 const App = () => {
   const [memory, setMemory] = useState(80);
@@ -28,7 +28,7 @@ const App = () => {
   const queryCpuData = async (minutes) => {
     try {
       const response = await fetch(
-        `http://localhost:3333/graphData?cpuGraphMinutes=${minutes}`,
+        `http://127.0.0.1:3333/graphData?cpuGraphMinutes=${minutes}`,
         {
           method: 'GET',
           headers: {
@@ -51,7 +51,7 @@ const App = () => {
   const queryMemoryData = async (minutes) => {
     try {
       const response = await fetch(
-        `http://localhost:3333/graphData?memoryGraphMinutes=${minutes}`,
+        `http://127.0.0.1:3333/graphData?memoryGraphMinutes=${minutes}`,
         {
           method: 'GET',
           headers: {
@@ -72,12 +72,18 @@ const App = () => {
   };
 
   const fetchRestartedPods = async () => {
-    const res = await fetch('http://localhost:3333/restarted');
+    const res = await fetch('http://127.0.0.1:3333/restarted');
     console.log(res);
     const restartedPods = await res.json();
     console.log(restartedPods);
     setRestartedPods(restartedPods);
   };
+
+  useEffect(() => {
+    // fetch restarted pods every 10 seconds
+    const restartedPodIntervalId = setInterval(fetchRestartedPods, 10000);
+    return () => clearInterval(restartedPodIntervalId);
+  }, []);
 
   const cpuGraphMinutesRef = useRef(cpuGraphMinutes);
   const memoryGraphMinutesRef = useRef(memoryGraphMinutes);
@@ -156,9 +162,9 @@ const App = () => {
       <Navbar />
       <div style={{ textAlign: 'center', margin: '20px 0' }}>
         <img
-          src={fullLogo}
+          src={halfLogo}
           alt='Logo'
-          style={{ maxWidth: '100%', height: 'auto' }}
+          style={{ maxWidth: '80%', height: 'auto', marginBottom: '20px' }}
         />
       </div>
       <ParameterContainer
