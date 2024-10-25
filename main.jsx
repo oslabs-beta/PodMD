@@ -7,10 +7,7 @@ import './style.css';
 import ParameterContainer from './client/components/ParameterContainer';
 import GraphsContainer from './client/components/GraphsContainer';
 import RestartedPodTable from './client/components/RestartedPodTable';
-import fullLogo from './client/assets/fullLogo.png';
-import logoDesign from './client/assets/logoDesign.png';
-import logoName from './client/assets/logoName.png';
-import logoSlogan from './client/assets/logoSlogan.png';
+import halfLogo from './client/assets/halfLogo.png';
 
 const App = () => {
   //State to configure frontend parameters
@@ -36,7 +33,7 @@ const App = () => {
   const queryCpuData = async (minutes) => {
     try {
       const response = await fetch(
-        `http://localhost:3333/graphData?cpuGraphMinutes=${minutes}`,
+        `http://127.0.0.1:3333/graphData?cpuGraphMinutes=${minutes}`,
         {
           method: 'GET',
           headers: {
@@ -59,7 +56,7 @@ const App = () => {
   const queryMemoryData = async (minutes) => {
     try {
       const response = await fetch(
-        `http://localhost:3333/graphData?memoryGraphMinutes=${minutes}`,
+        `http://127.0.0.1:3333/graphData?memoryGraphMinutes=${minutes}`,
         {
           method: 'GET',
           headers: {
@@ -106,12 +103,18 @@ const App = () => {
   // };
 
   const fetchRestartedPods = async () => {
-    const res = await fetch('http://localhost:3333/restarted');
+    const res = await fetch('http://127.0.0.1:3333/restarted');
     console.log(res);
     const restartedPods = await res.json();
     console.log(restartedPods);
     setRestartedPods(restartedPods);
   };
+
+  useEffect(() => {
+    // fetch restarted pods every 10 seconds
+    const restartedPodIntervalId = setInterval(fetchRestartedPods, 10000);
+    return () => clearInterval(restartedPodIntervalId);
+  }, []);
 
   const cpuGraphMinutesRef = useRef(cpuGraphMinutes);
   const memoryGraphMinutesRef = useRef(memoryGraphMinutes);
@@ -160,7 +163,7 @@ const App = () => {
         cpuTimeFrame,
       };
       // promise waiting on the fetch requst to the endpoint
-      const response = await fetch('http://localhost:3333/config', {
+      const response = await fetch('http://127.0.0.1:3333/config', {
         //post request from client side sends data to the server
         method: 'POST',
         // indicating that we are sending JSON data from client
@@ -204,9 +207,9 @@ const App = () => {
       <Navbar />
       <div style={{ textAlign: 'center', margin: '20px 0' }}>
         <img
-          src={fullLogo}
+          src={halfLogo}
           alt='Logo'
-          style={{ maxWidth: '100%', height: 'auto' }}
+          style={{ maxWidth: '80%', height: 'auto', marginBottom: '20px' }}
         />
       </div>
       <ParameterContainer
