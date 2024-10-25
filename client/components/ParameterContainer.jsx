@@ -1,7 +1,6 @@
 import React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import { Typography } from '@mui/material';
 import Parameters from './Parameter';
 import SavedConfig from './SavedConfig';
 import DataSaverOnIcon from '@mui/icons-material/DataSaverOn';

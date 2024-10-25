@@ -1,8 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import Graph from './Graph2';
-import { Chart, registerables } from 'chart.js';
-import Button from '@mui/material/Button';
-import { Typography } from '@mui/material';
+import React from 'react';
+import Graph from './Graph';
 
 const GraphsContainer = ({
   cpuGraphMinutes,

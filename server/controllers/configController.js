@@ -1,7 +1,5 @@
-// const promBundle = require('express-prom-bundle');
 const prometheusQueries = require('../services/prometheusService');
 
-//eliminated global variables in case multiple requests come in rapidly
 let config = {
   cpu: {
     label: 'cpu',
@@ -23,12 +21,9 @@ let config = {
   },
 };
 
-//create the controller object
 const configController = {};
-// define a function saveConfig as a method on the controller
 configController.saveConfig = (req, res, next) => {
   try {
-    // deconstruct the values sent in from the client off of the req.body
     const { memory, memTimeFrame, cpu, cpuTimeFrame } = req.body;
 
     config.cpu.threshold = cpu;
@@ -52,13 +47,9 @@ configController.saveConfig = (req, res, next) => {
       },
     };
 
-    // invoke the prometheusQueries
     prometheusQueries();
-    //move to the next piece of middleware/response to client
     return next();
-    // error catcher
   } catch (err) {
-    //invokes the next function in the chain, passing in err
     return next(err);
   }
 };

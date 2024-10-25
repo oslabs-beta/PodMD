@@ -1,22 +1,15 @@
-const promBundle = require('express-prom-bundle');
 const fetch = require('node-fetch');
 
-// this is the url to be able to submit user queries to prometheus
-const prometheusUrl = 'http://localhost:9090/api/v1/query?query=';
+const prometheusUrl = 'localhost';
+const docker = 'docker.host.internal';
 
-// variable that can be changed to tell function in queryPrometheus query whether we're demo'ing
 const runDemo = false;
-// name of pod to be restarted if running demo
 const demoPod = 'kube-apiserver-minikube';
 
-// helper function to handle prometheus queries
 const queryPrometheus = async (queryStr) => {
   try {
-    // the Url we will be querying Prometheus with
-    const encodedUrl = `${prometheusUrl}${encodeURIComponent(queryStr)}`;
-    // promise that has a fetch request to Prometheus and the data is stored in the response variable as a string
+    const encodedUrl = `http://localhost:9090/api/v1/query?query=${encodeURIComponent(queryStr)}`;
     const response = await fetch(encodedUrl);
-    //promise that jsonifies the reponse from Prometheus and stores the data in an javascript object format
     const data = await response.json();
     if (runDemo === true) {
       if (demoPod.length === 0)
