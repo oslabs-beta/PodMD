@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Chart, registerables } from 'chart.js';
-import Button from '@mui/material/Button';
 import { Typography } from '@mui/material';
 
-//registering all default components that may be used to create the graph but once we know exactly what we will use we can specify them directly to make it more optimized
 Chart.register(...registerables);
 
 const Graph = ({
@@ -17,7 +15,6 @@ const Graph = ({
   const [graphDisplay, setGraphDisplay] = useState(null);
   const [graphTitleDisplay, setGraphTitleDisplay] = useState('');
 
-  //creates a mutable object to attach our graph to
   const chartRef = useRef(null);
 
   const handleSelectDisplay = (mins) => {
@@ -41,7 +38,6 @@ const Graph = ({
       pod: item.metric.pod,
       usage: parseFloat(item.value[1]),
     }));
-    // rgba(216,190,31,255)
     const sortedData = combinedData.sort((a, b) => a.pod.localeCompare(b.pod));
 
     const labels = sortedData.map((item) => item.pod);
@@ -57,7 +53,6 @@ const Graph = ({
       else return 'rgba(84,171,180,1.0)';
     });
 
-    // we are destroying the previous chart instance if it exists
     if (graphDisplay) {
       graphDisplay.destroy();
     }
@@ -99,7 +94,6 @@ const Graph = ({
           tooltip: {
             callbacks: {
               label: function (context) {
-                // Round the value to remove decimal places
                 const roundedValue = Math.round(context.raw);
                 return `${context.dataset.label}: ${roundedValue}%`;
               },

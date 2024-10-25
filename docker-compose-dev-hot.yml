@@ -1,0 +1,9 @@
+services:
+  dev:
+    image: podpulse/pod-dev
+    container_name: pod-dev-hot
+    ports: [ 8080:8080, 3333:3333, 9090:9090 ]
+    volumes: [ ./:/usr/src/app, node_modules:/usr/src/app/node_modules ]
+    command: npm run dev:hot
+volumes:
+  node_modules:
