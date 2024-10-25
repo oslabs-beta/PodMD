@@ -6,6 +6,7 @@ import ParameterContainer from './client/components/ParameterContainer';
 import GraphsContainer from './client/components/GraphsContainer';
 import RestartedPodTable from './client/components/RestartedPodTable';
 import fullLogo from './client/assets/fullLogo.png';
+import { useRef } from 'react';
 
 const App = () => {
   const [memory, setMemory] = useState(80);
@@ -78,6 +79,11 @@ const App = () => {
     console.log(restartedPods);
     setRestartedPods(restartedPods);
   };
+
+  useEffect(() => {
+    const restartedPodIntervalId = setInterval(fetchRestartedPods, 10000);
+    return () => clearInterval(restartedPodIntervalId);
+  }, []);
 
   const cpuGraphMinutesRef = useRef(cpuGraphMinutes);
   const memoryGraphMinutesRef = useRef(memoryGraphMinutes);
