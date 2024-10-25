@@ -39,13 +39,3 @@ const RestartedPodRow = ({ timestamp, namespace, podName, label, value, threshol
 };
 
 export default RestartedPodRow;
-
-
-// {
-//   timestamp: 2024-10-15T20:16:39.205Z,
-//   namespace: 'kube-system',
-//   podName: 'etcd-minikube',
-//   label: 'Memory',
-//   value: '202.38404947916666',
-//   threshold: 1
-// },
