@@ -1,8 +1,11 @@
+const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const dotenv = require('dotenv-webpack');
 
 module.exports = {
+  watchOptions: {
+    poll: 1000
+  },
   entry: './main.jsx',
   output: {
     filename: 'bundle.js',
@@ -12,19 +15,23 @@ module.exports = {
   devtool: 'eval-source-map',
   mode: 'development',
   devServer: {
-    host: 'localhost',
+    compress: false,
+    host: '0.0.0.0',
     port: 8080,
+    hot: true,
     static: {
       directory: path.resolve(__dirname, 'build'),
       publicPath: '/'
     },
-    // proxy: [
-    //   {
-    //     context: ['/', '/restarted', '/graphData', '/config'],
-    //     target: 'http://localhost:3333/',
-    //     secure: false,
-    //   },
-    // ],
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    proxy: [
+      {
+        context: ['/**'],
+        target: 'http://localhost:3333',
+        changeOrigin: true,
+        secure: false,
+      }
+    ]
   },
   module: {
     rules: [

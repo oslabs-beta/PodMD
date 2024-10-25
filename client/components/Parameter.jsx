@@ -1,7 +1,6 @@
 import React from 'react';
 import Slider from '@mui/material/Slider';
 import Box from '@mui/material/Box';
-import { Typography } from '@mui/material';
 import TimeInput from './TimeInput';
 
 const Parameter = ({ metric, onChange, value, timeFrame, onTimeChange }) => {

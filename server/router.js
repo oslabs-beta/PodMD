@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = 3333;
-const fs = require('fs');
 const cors = require('cors');
 const {
   restartedPods,

@@ -1,5 +1,3 @@
-// LEAVE IN ROOT FOR VITE
-
 import React, { useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import Navbar from './client/components/Navbar';
@@ -12,13 +10,14 @@ import logoDesign from './client/assets/logoDesign.png';
 import logoName from './client/assets/logoName.png';
 import logoSlogan from './client/assets/logoSlogan.png';
 
+const docker = 'host.docker.internal';
+const localhost = 'localhost';
+
 const App = () => {
-  //State to configure frontend parameters
   const [memory, setMemory] = useState(80);
   const [memTimeFrame, setMemTimeFrame] = useState(30);
   const [cpu, setCpu] = useState(80);
   const [cpuTimeFrame, setCpuTimeFrame] = useState(30);
-  //savedConfiguration added to track saved parameters for frontend display. ADD TO FRONTEND DISPLAY
   const [savedConfiguration, setSavedConfiguration] = useState({
     savedMemoryThreshold: 0,
     savedMemTimeFrame: 0,
@@ -26,7 +25,6 @@ const App = () => {
     savedCpuTimeFrame: 0,
   });
 
-  //State for graph displays
   const [memoryData, setMemoryData] = useState([]);
   const [cpuData, setCpuData] = useState([]);
   const [graphMinutes, setGraphMinutes] = useState(60);
@@ -54,27 +52,25 @@ const App = () => {
     }
   };
 
-  //fetch memory data to be displayed in graph
   const fetchMemoryData = async () => {
     const query = `sum(avg_over_time(container_memory_usage_bytes[${graphMinutes}m])) by (pod)
     /
     sum(kube_pod_container_resource_requests{resource="memory"}) by (pod) * 100
     `;
     const res = await fetch(
-      `http://localhost:9090/api/v1/query?query=${encodeURIComponent(query)}`
+      `http://${localhost}:9090/api/v1/query?query=${encodeURIComponent(query)}`
     );
     const data = await res.json();
     setMemoryData(data.data.result);
   };
 
-  //fetch cpu data to be displayed in graph
   const fetchCpuData = async () => {
     const query = `
     avg(rate(container_cpu_usage_seconds_total[${graphMinutes}m])) by (pod)/
     sum(kube_pod_container_resource_requests{resource="cpu"}) by (pod) * 100
     `;
     const res = await fetch(
-      `http://localhost:9090/api/v1/query?query=${encodeURIComponent(query)}`
+      `http://${localhost}:9090/api/v1/query?query=${encodeURIComponent(query)}`
     );
     const data = await res.json();
     setCpuData(data.data.result);
@@ -89,51 +85,34 @@ const App = () => {
   };
 
   useEffect(() => {
-    // fetch restarted pods every 10 seconds
     const restartedPodIntervalId = setInterval(fetchRestartedPods, 10000);
     return () => clearInterval(restartedPodIntervalId);
   }, []);
 
   useEffect(() => {
     queryChartData(graphMinutes);
-    // fetchMemoryData(graphMinutes);
-    // fetchCpuData(graphMinutes);
   }, [graphMinutes]);
 
-  // SAMPLE CLIENT DATA:
-  // {
-  //   "memory": 1024,
-  //   "memTimeFrame": 30,
-  //   "cpu": 4,
-  //   "cpuTimeFrame": 15
-  // }
+  // SAMPLE CLIENT DA
 
-  //function for submitting our new config
   const setConfiguration = async (memory, memTimeFrame, cpu, cpuTimeFrame) => {
     try {
-      //deconstructing to get values
       const config = {
         memory,
         memTimeFrame,
         cpu,
         cpuTimeFrame,
       };
-      // promise waiting on the fetch requst to the endpoint
       const response = await fetch('http://localhost:3333/config', {
-        //post request from client side sends data to the server
         method: 'POST',
-        // indicating that we are sending JSON data from client
         headers: {
           'Content-Type': 'application/json',
         },
-        // convert the javascript object into a string
         body: JSON.stringify(config),
       });
-      // if there is something wrong with the response
       if (!response.ok) {
         throw new Error('Failed to send configuration');
       }
-      // parse the json reponse - What will we be responding with??
       const result = await response.json();
       console.log('Configuration saved successfully:', result);
       setSavedConfiguration({
@@ -148,12 +127,10 @@ const App = () => {
     }
   };
 
-  //function that runs when we click the submit button
   const handleSubmit = () => {
     console.log(`Memory: ${memory}, TimeFrame: ${memTimeFrame}`);
     console.log(`CPU: ${cpu}, TimeFrame: ${cpuTimeFrame}`);
     console.log({ memory, memTimeFrame, cpu, cpuTimeFrame });
-    //invoke the set configuration function passing in the client submitted fields
     setConfiguration(memory, memTimeFrame, cpu, cpuTimeFrame);
   };
 
