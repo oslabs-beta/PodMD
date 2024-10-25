@@ -11,7 +11,7 @@ dist
 dist-ssr
 *.local
 eks-cluster-role-trust-policy.json
-
+.DS_Store
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
