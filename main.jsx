@@ -5,7 +5,8 @@ import './style.css';
 import ParameterContainer from './client/components/ParameterContainer';
 import GraphsContainer from './client/components/GraphsContainer';
 import RestartedPodTable from './client/components/RestartedPodTable';
-import halfLogo from './client/assets/halfLogo.png';
+import fullLogo from './client/assets/fullLogo.png';
+import { useRef } from 'react';
 
 const App = () => {
   const [memory, setMemory] = useState(80);
@@ -80,7 +81,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    // fetch restarted pods every 10 seconds
     const restartedPodIntervalId = setInterval(fetchRestartedPods, 10000);
     return () => clearInterval(restartedPodIntervalId);
   }, []);

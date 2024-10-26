@@ -35,44 +35,6 @@ function Navbar() {
             height='auto'
             margin='0.5rem 1.0rem'
           />
-
-          <Box sx={{ marginLeft: 'auto' }}>
-            <Button
-              variant='text'
-              sx={{
-                color: '#adadad',
-                '&:hover': {
-                  backgroundColor: '#54abb4',
-                },
-                margin: '0px 10px',
-              }}
-            >
-              Previous Configs
-            </Button>
-            <Button
-              variant='text'
-              sx={{
-                color: '#adadad',
-                '&:hover': {
-                  backgroundColor: '#54abb4',
-                },
-                margin: '0px 10px',
-              }}
-            >
-              More Details
-            </Button>
-            <Button
-              sx={{
-                color: '#adadad',
-                '&:hover': {
-                  backgroundColor: '#54abb4',
-                },
-                margin: '0px 10px',
-              }}
-            >
-              Login
-            </Button>
-          </Box>
         </Toolbar>
       </AppBar>
       <style jsx>{`
@@ -87,7 +49,6 @@ function Navbar() {
             transform: scale(1);
           }
         }
-
         .logo:hover {
           animation: pulse 0.6s infinite;
           filter: grayscale(0%);
