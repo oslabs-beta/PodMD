@@ -23,15 +23,7 @@ module.exports = {
     static: {
       directory: path.resolve(__dirname, 'build'),
     },
-    headers: { 'Access-Control-Allow-Origin': '*' },
-    proxy: [
-      {
-        context: ['/**'],
-        target: 'http://localhost:3333',
-        changeOrigin: true,
-        secure: false,
-      }
-    ]
+
   },
   module: {
     rules: [

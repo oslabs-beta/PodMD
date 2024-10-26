@@ -5,8 +5,7 @@ import './style.css';
 import ParameterContainer from './client/components/ParameterContainer';
 import GraphsContainer from './client/components/GraphsContainer';
 import RestartedPodTable from './client/components/RestartedPodTable';
-import fullLogo from './client/assets/fullLogo.png';
-import { useRef } from 'react';
+import halfLogo from './client/assets/halfLogo.png';
 
 const App = () => {
   const [memory, setMemory] = useState(80);
