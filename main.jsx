@@ -80,7 +80,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    // fetch restarted pods every 10 seconds
     const restartedPodIntervalId = setInterval(fetchRestartedPods, 10000);
     return () => clearInterval(restartedPodIntervalId);
   }, []);

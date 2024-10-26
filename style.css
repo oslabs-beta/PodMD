@@ -175,14 +175,15 @@ button:focus-visible {
 }
 
 .graphs {
-  width: 900px;
+  width: 60em;
+  border-radius: 8px;
   margin-top: 50px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: space-between;
   margin-bottom: 20px;
-  /* background-color: #666565; */
+  background-color: #363637;
 }
 
 #graphContain {
@@ -294,26 +295,44 @@ input[id='radio-3']:checked ~ .graphSlider {
   transition: 0.25s ease-out;
 }
 
+th {
+  text-align: left;
+}
+
+#firstHeader {
+  color: #adadad;
+  text-align: left;
+}
+
+.MuiTableCell-root.MuiTableCell-head.tableHeader {
+  font-family: 'Aldrich', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  color: #adadad;
+}
+
+/* Style for individual header cells */
+#tblhd .MuiTableCell-root {
+  padding: 5px;
+  text-align: center;
+  font-size: 15px;
+  color: #adadad;
+}
+#tblhd #firstHeader {
+  text-align: left;
+}
+
+.MuiTableBody-root {
+  display: flex;
+  justify-content: space-around;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  text-align: center;
+  color: #adadad;
+}
+
 @media (max-width: 760px) {
   .tabs {
     transform: scale(0.6);
   }
 }
-
-/* .thead {
-  background-color: #242424;
-  color: #242424;
-  font-weight: 900;
-} */
-/*
-/* @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  } */
