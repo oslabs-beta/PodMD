@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import logo from '../assets/logo.png';
+import logoName from '../assets/logoName.png';
 import slogan from '../assets/slogan.png';
 
 function Navbar() {
@@ -10,29 +11,42 @@ function Navbar() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='fixed' sx={{ backgroundColor: '#242424' }}>
         <Toolbar
+          id='toolbar'
           sx={{
             backgroundColor: '#242424',
             borderRadius: '8px',
-          }}
-        >
-          <img
-            src={logo}
-            alt='PodMD Logo'
-            className='logo heartbeat'
-            style={{
-              width: '40px',
-              height: 'auto',
-              margin: '0.5rem 0.5rem',
-              transition: 'filter 0.3s',
-              filter: 'grayscale(10%)',
-            }}
-          />
+          }}>
+          <div>
+            <img
+              src={logo}
+              alt='PodMD Logo'
+              className='logo heartbeat'
+              style={{
+                width: '65px',
+                height: 'auto',
+                margin: '0.5rem 0.5rem',
+                transition: 'filter 0.3s',
+                filter: 'grayscale(10%)',
+              }}
+            />
+            <img
+              src={logoName}
+              alt='PodMD'
+              className='logoName'
+              style={{
+                width: '100px',
+                height: 'auto',
+                margin: '0.5rem 0.5rem',
+                transition: 'filter 0.3s',
+                filter: 'grayscale(10%)',
+              }}
+            />
+          </div>
           <img
             src={slogan}
             alt='PodMD - Cluster Monitoring for Developers'
             width='250px'
             height='auto'
-            margin='10px'
           />
         </Toolbar>
       </AppBar>
