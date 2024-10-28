@@ -147,6 +147,11 @@ const App = () => {
     }
   };
 
+  const manualGraphRefresh = () => {
+    queryCpuData(cpuGraphMinutes);
+    queryMemoryData(memoryGraphMinutes);
+  };
+
   const handleSubmit = () => {
     console.log(`Memory: ${memory}, TimeFrame: ${memTimeFrame}`);
     console.log(`CPU: ${cpu}, TimeFrame: ${cpuTimeFrame}`);
@@ -178,6 +183,7 @@ const App = () => {
       />
       <GraphsContainer
         id='graphContain'
+        manualGraphRefresh={manualGraphRefresh}
         cpuGraphMinutes={cpuGraphMinutes}
         memoryGraphMinutes={memoryGraphMinutes}
         setCpuGraphMinutes={setCpuGraphMinutes}
