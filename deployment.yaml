@@ -1,20 +1,22 @@
+# Replace lines marked '#' with your preferences.
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: pod-dev
+  name: #
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: pod-dev-hot
+      app: #
   template:
     metadata:
       labels:
-        app: pod-dev-hot
+        app: #
     spec:
       containers:
-      - name: pod-dev-hot
-        image: podpulse/pod-dev:latest
+      - name: #
+        image: #
         ports:
-        - containerPort: 8080
-        - containerPort: 3333
+        - containerPort: #
+        - containerPort: #

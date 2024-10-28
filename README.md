@@ -1,15 +1,15 @@
-# PodPulse
+# PodMD
 
-PodPulse is a tool for developers utilizing and maintaining kubernetes clusters.\
-With PodPulse, you may set a specific configuration of desired pod metrics\
+PodMD is a tool for developers utilizing and maintaining kubernetes clusters.\
+With PodMD, you may set a specific configuration of desired pod metrics\
 you wish to monitor and enable an automatic restart of designated pods based\
 on your specific needs.\
 
 ## Getting Started
 
-In order to use PodPulse, you need to deploy Prometheus on your cluster to\
+In order to use PodMD, you need to deploy Prometheus on your cluster to\
 monitor pod metrics. You may also wish to install Grafana, but it isn't\
-necessary for PodPulse to function.
+necessary for PodMD to function.
 
 Additionally, it is _strongly_ recommended you utilize Helm for installing\
 the following tools. You can find instructions to install helm here:\
@@ -46,3 +46,7 @@ visualizations with Grafana..
 4) Install dependencies with: `npm install`
 5) Run the server using: `npm run back:start`
 6) Run the client using: `npm run dev`
+
+## Implementing AWS Functionality
+
+PodMD 

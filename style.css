@@ -46,6 +46,13 @@ h1 {
 h2 {
   font-family: 'Aldrich', sans-serif;
   color: #adadad;
+  padding: 3px;
+}
+
+h3 {
+  font-family: 'Aldrich', sans-serif;
+  color: #adadad;
+  margin: 0;
 }
 
 h3 {
@@ -60,6 +67,11 @@ h3 {
   text-align: center;
 }
 
+#LogoBox {
+  height: 600px;
+  width: auto;
+}
+
 #sliderTitle {
   display: flex;
   flex-direction: row;
@@ -72,11 +84,6 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
-
-#timeInput {
-  display: flex;
-  align-items: center;
 }
 
 .logo {
@@ -95,7 +102,12 @@ h3 {
 #paramBox {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 8px;
+  width: 400px;
+  background-color: #363637;
+  filter: drop-shadow(1px 1px 1px #1e1d1d);
 }
 
 li {
@@ -142,9 +154,9 @@ button:focus-visible {
 
 #settingsCard {
   border: 0;
+  width: 400px;
   border-radius: 8px;
   background-color: #363637;
-  width: 400px;
   filter: drop-shadow(1px 1px 1px #1e1d1d);
 }
 
@@ -161,14 +173,25 @@ button:focus-visible {
 }
 
 #timeInput {
-  margin-top: 8px;
-  padding: 5px;
   border-radius: 4px;
-  background-color: #242424;
   height: 25px;
+  width: 45px;
   text-align: center;
-  border: 0;
+  border: 2px solid #adadad;
+  color: #adadad;
+  background-color: transparent;
+  font-family: 'Aldrich', sans-serif;
 }
+
+#timeInputField {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 35px;
+  width: 280px;
+  margin: 0;
+}
+
 
 #configContainer {
   display: flex;
@@ -184,6 +207,7 @@ button:focus-visible {
   align-items: space-between;
   margin-bottom: 20px;
   background-color: #363637;
+  filter: drop-shadow(1px 1px 1px #1e1d1d);
 }
 
 #graphContain {
