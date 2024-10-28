@@ -1,4 +1,5 @@
 import * as React from 'react';
+import TimeToolTip from './ToolTip';
 
 const TimeInput = React.forwardRef(function CustomNumberInput(
   { timeFrame, onTimeChange, ...props },
@@ -6,7 +7,7 @@ const TimeInput = React.forwardRef(function CustomNumberInput(
 ) {
   return (
     <div id='timeInputField'>
-      <h3 id='timeInputLabel'>Refresh window (min)</h3>
+      <div id='timeInputLabel'>Refresh window (min)</div>
       <input
         id='timeInput'
         type='number'
@@ -16,6 +17,7 @@ const TimeInput = React.forwardRef(function CustomNumberInput(
         onChange={(e) => onTimeChange(e.target.value)}
         aria-label='Refresh window in minutes'
       />
+      <TimeToolTip id='timeTool' />
     </div>
   );
 });

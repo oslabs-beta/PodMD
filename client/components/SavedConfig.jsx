@@ -12,7 +12,7 @@ const SavedConfig = ({ savedConfiguration }) => {
     <list>
         <li>Max memory usage: {savedMemoryThreshold}</li>
         <li>Time frame: {savedMemTimeFrame}</li>
-        <li>Max cpu usage: {savedCpuThreshold}</li>
+        <li>Max CPU usage: {savedCpuThreshold}</li>
         <li>Time frame: {savedCpuTimeFrame}</li>
       </list></>
   );
