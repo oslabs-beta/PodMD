@@ -5,7 +5,6 @@ import './style.css';
 import ParameterContainer from './client/components/ParameterContainer';
 import GraphsContainer from './client/components/GraphsContainer';
 import RestartedPodTable from './client/components/RestartedPodTable';
-import halfLogo from './client/assets/halfLogo.png';
 
 const App = () => {
   const [memory, setMemory] = useState(80);
@@ -162,13 +161,6 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <div id='LogoBox' style={{ textAlign: 'center', margin: '20px 0' }}>
-        <img
-          id='logo'
-          src={halfLogo}
-          alt='Logo'
-        />
-      </div>
       <ParameterContainer
         handleSubmit={handleSubmit}
         memory={memory}
