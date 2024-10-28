@@ -2,9 +2,8 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import Button from '@mui/material/Button';
-import logoDesign from '../assets/logoDesign.png';
-import logoSlogan from '../assets/logoSlogan.png';
+import logo from '../assets/logo.png';
+import slogan from '../assets/slogan.png';
 
 function Navbar() {
   return (
@@ -17,8 +16,8 @@ function Navbar() {
           }}
         >
           <img
-            src={logoDesign}
-            alt='PodPulse Logo'
+            src={logo}
+            alt='PodMD Logo'
             className='logo heartbeat'
             style={{
               width: '40px',
@@ -29,11 +28,11 @@ function Navbar() {
             }}
           />
           <img
-            src={logoSlogan}
-            alt='PodPulse - Your DevOps Companion'
-            width='500px'
+            src={slogan}
+            alt='PodMD - Cluster Monitoring for Developers'
+            width='250px'
             height='auto'
-            margin='0.5rem 1.0rem'
+            margin='10px'
           />
         </Toolbar>
       </AppBar>

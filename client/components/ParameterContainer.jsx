@@ -38,26 +38,25 @@ const ParameterContainer = ({
         </Box>
         <Box id='settingsCard'>
           <SavedConfig savedConfiguration={savedConfiguration} />
+            <Box id='configButton'>
+              <Button
+                sx={{
+                  color: '#242424',
+                  backgroundColor: '#54abb4',
+                  borderRadius: '4px',
+                  '&:hover': {
+                    backgroundColor: '#54abb4',
+                  },
+                }}
+                variant='contained'
+                id='saveButton'
+                onClick={handleSubmit}
+                endIcon={<DataSaverOnIcon />}>
+                Save Config
+              </Button>
+            </Box>
         </Box>
       </div>
-      <Box id='configButton'>
-        <Button
-          sx={{
-            color: '#242424',
-            backgroundColor: '#54abb4',
-            borderRadius: '4px',
-            '&:hover': {
-              backgroundColor: '#54abb4',
-            },
-          }}
-          variant='contained'
-          id='saveButton'
-          onClick={handleSubmit}
-          endIcon={<DataSaverOnIcon />}
-        >
-          Save Config
-        </Button>
-      </Box>
     </>
   );
 };

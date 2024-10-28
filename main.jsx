@@ -13,10 +13,10 @@ const App = () => {
   const [cpu, setCpu] = useState(80);
   const [cpuTimeFrame, setCpuTimeFrame] = useState(30);
   const [savedConfiguration, setSavedConfiguration] = useState({
-    savedMemoryThreshold: 0,
-    savedMemTimeFrame: 0,
-    savedCpuThreshold: 0,
-    savedCpuTimeFrame: 0,
+    savedMemoryThreshold: 80,
+    savedMemTimeFrame: 30,
+    savedCpuThreshold: 80,
+    savedCpuTimeFrame: 30,
   });
 
   const [memoryData, setMemoryData] = useState([]);
@@ -112,8 +112,6 @@ const App = () => {
     queryCpuData(cpuGraphMinutes);
   }, [cpuGraphMinutes]);
 
-  // SAMPLE CLIENT DA
-
   const setConfiguration = async (memory, memTimeFrame, cpu, cpuTimeFrame) => {
     try {
       const config = {
@@ -159,11 +157,11 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <div style={{ textAlign: 'center', margin: '20px 0' }}>
+      <div id='LogoBox' style={{ textAlign: 'center', margin: '20px 0' }}>
         <img
+          id='logo'
           src={halfLogo}
           alt='Logo'
-          style={{ maxWidth: '80%', height: 'auto', marginBottom: '20px' }}
         />
       </div>
       <ParameterContainer
