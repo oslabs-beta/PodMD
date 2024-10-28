@@ -1,4 +1,4 @@
-const config = require('./configController');
+const {config} = require('./configController');
 const queryPrometheus = require('../services/prometheusService');
 const deletePod = require('./kubeController');
 console.log('Prometheus Controller Running!');
@@ -21,7 +21,7 @@ prometheusController.fetchGraphData = async (req, res, next) => {
       avg(rate(container_cpu_usage_seconds_total[${cpuGraphMinutes}m])) by (pod, namespace)/
       sum(kube_pod_container_resource_requests{resource="cpu"}) by (pod, namespace) * 100
       `;
-      cpuData = await queryPrometheus(cpuQuery);
+      cpuData = await queryPrometheus(cpuQuery, config.cpu.threshold);
       res.locals.data = { cpuData };
     }
     if (memoryGraphMinutes) {
@@ -29,7 +29,7 @@ prometheusController.fetchGraphData = async (req, res, next) => {
     /
     sum(kube_pod_container_resource_requests{resource="memory"}) by (pod, namespace) * 100
     `;
-      memData = await queryPrometheus(memQuery);
+      memData = await queryPrometheus(memQuery, config.memory.threshold);
       res.locals.data = { memData };
     }
 
@@ -43,7 +43,7 @@ const checkRestart = async (obj) => {
   console.log(obj);
   const { threshold, queryString, label } = obj;
   console.log(`LOOK HERE: ${queryString}`);
-  const data = await queryPrometheus(queryString);
+  const data = await queryPrometheus(queryString, threshold);
   if (data.status === 'success') {
     const results = data.data.result;
     console.log(`PromQL ${label} data array:`, results);
@@ -74,12 +74,12 @@ const checkRestart = async (obj) => {
   }
 };
 
-const restartChecks = async (configObj) => {
+const restartChecks = async (config) => {
   // invoke Promise.all and pass in the function invocations with arguments in the order it needs to be run in an array
   await Promise.all([
-    checkRestart(configObj.cpu),
-    checkRestart(configObj.memory),
+    checkRestart(config.cpu),
+    checkRestart(config.memory),
   ]);
 };
-setInterval(() => restartChecks(config.config), 1000 * 60 * callInterval);
+setInterval(() => restartChecks(config), 1000 * 60 * callInterval);
 module.exports = { restartedPods, prometheusController };
