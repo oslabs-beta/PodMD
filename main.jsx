@@ -157,8 +157,11 @@ const App = () => {
   return (
     <div>
       <Navbar />
-      <div id='LogoBox' style={{ textAlign: 'center', margin: '20px 0' }}>
+      <div id='LogoBox' style={{ height: '300px', textAlign: 'center', margin: '20px 0' }}>
         <img
+          style={{
+            maxHeight: '65%'
+          }}
           id='logo'
           src={halfLogo}
           alt='Logo'

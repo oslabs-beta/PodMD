@@ -86,12 +86,12 @@ h3 {
   align-items: flex-start;
 }
 
-.logo {
-  height: 6em;
+/* .logo {
+  max-height: 25%;
   padding: 0.5em;
   will-change: filter;
   transition: filter 300ms;
-}
+} */
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
