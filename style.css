@@ -60,6 +60,11 @@ h3 {
   color: #adadad;
 }
 
+h4 {
+  font-family: 'Aldrich', sans-serif;
+  color: #adadad;
+}
+
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -67,9 +72,9 @@ h3 {
   text-align: center;
 }
 
-#LogoBox {
-  height: 600px;
-  width: auto;
+#toolbar {
+  display: flex;
+  justify-content: space-between;
 }
 
 #sliderTitle {
@@ -172,6 +177,11 @@ button:focus-visible {
   padding: 20px;
 }
 
+#timeInputLabel {
+  font-family: 'Aldrich', sans-serif;
+  color: #adadad;
+}
+
 #timeInput {
   border-radius: 4px;
   height: 25px;
@@ -181,17 +191,20 @@ button:focus-visible {
   color: #adadad;
   background-color: transparent;
   font-family: 'Aldrich', sans-serif;
+  margin-left: 10px;
 }
+
 
 #timeInputField {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 35px;
-  width: 280px;
-  margin: 0;
 }
 
+#timeTool {
+  margin-left: 10px;
+  color: #adadad;
+}
 
 #configContainer {
   display: flex;
