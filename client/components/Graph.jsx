@@ -105,12 +105,12 @@ const Graph = ({
   }, [data, title]);
 
   return (
-    <div>
+    <div id='innerGraphBox'>
       <h2 variant='h5'>{`Average ${title}`}</h2>
       <div className='sliderContainer'>
         <div className='tabs'>
           {[1440, 60, 10].map((mins) => (
-            <div key={mins}>
+            <div id='tab' key={mins}>
               <input
                 className='radio'
                 type='radio'
