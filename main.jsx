@@ -129,10 +129,6 @@ const App = () => {
         savedMemTimeFrame: result.memory.minutes,
         savedCpuThreshold: result.cpu.threshold,
         savedCpuTimeFrame: result.cpu.minutes,
-        savedMemoryThreshold: result.memory.threshold,
-        savedMemTimeFrame: result.memory.minutes,
-        savedCpuThreshold: result.cpu.threshold,
-        savedCpuTimeFrame: result.cpu.minutes,
       });
     } catch (error) {
       console.error('Error sending configuration:', error);
