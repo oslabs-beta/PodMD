@@ -91,12 +91,6 @@ h4 {
   align-items: flex-start;
 }
 
-/* .logo {
-  max-height: 25%;
-  padding: 0.5em;
-  will-change: filter;
-  transition: filter 300ms;
-} */
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
@@ -266,10 +260,15 @@ tr:nth-child(odd) {
   }
 }
 
+#innerGraphBox {
+  display: flex;
+  flex-direction: column;
+}
+
 .sliderContainer {
   position: relative; /* Change to relative */
-  width: 100%; /* Set a width */
-  height: 80px; /* Define a height */
+  width: 350px; /* Set a width */
+  height: 60px; /* Define a height */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -277,14 +276,17 @@ tr:nth-child(odd) {
 
 .tabs {
   display: flex;
+  justify-content: space-between;
+  width: 100%;
   position: relative;
-  background: black;
-  padding: 8px; /* Adjust padding for a better fit */
-  border-radius: 40px; /* Adjusted for a smaller radius */
-  box-shadow: 0 6px 12px 0 rgba(24, 94, 224, 0.15);
+  background: #242424;
+  padding: 8px;
+  border-radius: 40px;
+  box-shadow: 0 6px 12px 0 #2a2a2b;
 }
 
 .tabs * {
+
   z-index: 4;
 }
 
@@ -296,11 +298,12 @@ tr:nth-child(odd) {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px; /* Adjust height */
-  width: 150px; /* Adjust width */
-  font-size: 16px; /* Adjust font size */
+  height: 40px;
+  width: 75px;
+  font-size: 14px;
   font-weight: 600;
-  border-radius: 40px; /* Adjusted for a smaller radius */
+  font-family: 'Aldrich', sans-serif;
+  border-radius: 40px;
   cursor: pointer;
   transition: color 0.15s ease-in;
 }
@@ -314,18 +317,18 @@ input[id='radio-1']:checked ~ .graphSlider {
 }
 
 input[id='radio-2']:checked ~ .graphSlider {
-  transform: translateX(150px); /* Match with tab width */
+  transform: translateX(80px); /* Match with tab width */
 }
 
 input[id='radio-3']:checked ~ .graphSlider {
-  transform: translateX(300px); /* Match with tab width */
+  transform: translateX(160px); /* Match with tab width */
 }
 
 .graphSlider {
-  position: absolute;
+  position: relative;
   display: flex;
   height: 40px; /* Adjust height */
-  width: 150px; /* Match with tab width */
+  width: 75px; /* Match with tab width */
   background: #54abb4;
   z-index: 1;
   border-radius: 40px; /* Adjusted for a smaller radius */
