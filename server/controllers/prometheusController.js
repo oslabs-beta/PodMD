@@ -1,5 +1,5 @@
-const {config} = require('./configController');
-const queryPrometheus = require('../services/prometheusService');
+const { config } = require('./configController');
+const { queryPrometheus, runDemo } = require('../services/prometheusService');
 const deletePod = require('./kubeController');
 console.log('Prometheus Controller Running!');
 
@@ -11,6 +11,10 @@ const prometheusController = {};
 
 prometheusController.fetchGraphData = async (req, res, next) => {
   try {
+    if (runDemo) {
+      await checkRestart(config.cpu);
+      await checkRestart(config.memory);
+    }
     const cpuGraphMinutes = req.query.cpuGraphMinutes;
     const memoryGraphMinutes = req.query.memoryGraphMinutes;
 
@@ -40,23 +44,15 @@ prometheusController.fetchGraphData = async (req, res, next) => {
 };
 
 const checkRestart = async (obj) => {
-  console.log(obj);
   const { threshold, queryString, label } = obj;
-  console.log(`LOOK HERE: ${queryString}`);
   const data = await queryPrometheus(queryString, threshold);
   if (data.status === 'success') {
     const results = data.data.result;
-    console.log(`PromQL ${label} data array:`, results);
     results.forEach((pod) => {
       if (
         pod.value[1] > threshold &&
         pod.metric.pod !== 'prometheus-prometheus-kube-prometheus-prometheus-0'
       ) {
-        console.log(
-          `${pod.metric.pod} pod ${label} usage of ${
-            Math.floor(pod.value[1] * 100) / 100
-          }% exceeds threshold of ${threshold}%. Deleting ${pod.metric.pod}`
-        );
         restartedPods.push({
           timestamp: new Date(),
           namespace: pod.metric.namespace,
@@ -65,10 +61,13 @@ const checkRestart = async (obj) => {
           value: pod.value[1],
           threshold,
         });
-        console.log(restartedPods);
+        console.log(
+          `deleting with threshold of ${threshold} and value of ${pod.value[1]}`
+        );
         deletePod(pod.metric.pod, pod.metric.namespace);
       }
     });
+    console.log(restartedPods);
   } else {
     console.error(`PromQL ${label} query failed:`, data.error);
   }
@@ -76,10 +75,7 @@ const checkRestart = async (obj) => {
 
 const restartChecks = async (config) => {
   // invoke Promise.all and pass in the function invocations with arguments in the order it needs to be run in an array
-  await Promise.all([
-    checkRestart(config.cpu),
-    checkRestart(config.memory),
-  ]);
+  await Promise.all([checkRestart(config.cpu), checkRestart(config.memory)]);
 };
 setInterval(() => restartChecks(config), 1000 * 60 * callInterval);
 module.exports = { restartedPods, prometheusController };

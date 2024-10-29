@@ -17,7 +17,6 @@ const GraphsContainer = ({
 }) => {
 
   const [refreshHover, setRefreshHover] = useState(false);
-  const [hasRefreshed, setHasRefreshed] = useState(false);
 
   const handleCpuSliderChange = (mins) => {
     setCpuGraphMinutes(mins);
@@ -38,9 +37,7 @@ const GraphsContainer = ({
   };
 
   const handleRefreshClick = () => {
-    setHasRefreshed(true);
     manualGraphRefresh();
-    setTimeout(() => { setHasRefreshed(false); }, 2500);
   };
 
   return (

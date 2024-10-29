@@ -18,9 +18,7 @@ const Graph = ({
   const chartRef = useRef(null);
 
   const handleSelectDisplay = (mins) => {
-    console.log(
-      `selectDisplay func setting display to ${mins} minutes for ${title}!`
-    );
+
     if (title === 'CPU Usage') {
       setCpuGraphMinutes(mins);
     } else if (title === 'Memory Usage') {
