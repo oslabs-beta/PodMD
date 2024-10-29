@@ -61,13 +61,9 @@ const checkRestart = async (obj) => {
           value: pod.value[1],
           threshold,
         });
-        console.log(
-          `deleting with threshold of ${threshold} and value of ${pod.value[1]}`
-        );
         deletePod(pod.metric.pod, pod.metric.namespace);
       }
     });
-    console.log(restartedPods);
   } else {
     console.error(`PromQL ${label} query failed:`, data.error);
   }
