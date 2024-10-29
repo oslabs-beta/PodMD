@@ -17,13 +17,12 @@ const queryPrometheus = async (queryStr, threshold) => {
     const response = await fetch(encodedUrl);
     const data = await response.json();
     if (runDemo === true) {
-      console.log(`demoHasRun: ${demoHasRun}`)
       if (demoPod.length === 0)
-        console.log('ERROR: server set to demo but no demo pod name entered');
+        throw new Error('ERROR: app set to demo-mode but no pod name entered');
       for (const pod of data.data.result) {
         if (pod.metric.pod === demoPod && demoHasRun === false) {
           pod.value[1] = 75 + Math.random() * 5;
-          if(pod.value[1] > threshold) demoHasRun = true;
+          if (pod.value[1] > threshold) demoHasRun = true;
         } else {
           pod.value[1] = 40 + Math.random() * 10;
         }
@@ -31,9 +30,9 @@ const queryPrometheus = async (queryStr, threshold) => {
     }
     return data;
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return err;
   }
 };
 
-module.exports = queryPrometheus;
+module.exports = { queryPrometheus, runDemo };

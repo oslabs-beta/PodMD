@@ -12,17 +12,15 @@ async function getPods() {
       console.log(`${pod.metadata.namespace} - ${pod.metadata.name}`);
     });
   } catch (err) {
-    console.log(`Error getting pods: ${err}`);
+    console.error(`Error getting pods: ${err}`);
   }
 }
 
 async function deletePod(podName, podNamespace) {
-  console.log('Attempting to delete', podName)
   try {
     const res = await k8sApi.deleteNamespacedPod(podName, podNamespace);
-    console.log(`Successfully deleted ${podName} with Namespace ${podNamespace}.`);
   } catch (err) {
-    console.log(`Error deleting pod: ${JSON.stringify(err)}`);
+    console.error(`Error deleting pod: ${JSON.stringify(err)}`);
   }
 }
 

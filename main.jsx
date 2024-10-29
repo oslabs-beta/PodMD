@@ -40,8 +40,6 @@ const App = () => {
       }
       const result = await response.json();
       setCpuData(result.cpuData.data.result);
-
-      console.log('Graph data fetched successfully:', result);
     } catch (error) {
       console.error('Error fetching graph data:', error);
     }
@@ -63,8 +61,6 @@ const App = () => {
       }
       const result = await response.json();
       setMemoryData(result.memData.data.result);
-
-      console.log('Graph data fetched successfully:', result);
     } catch (error) {
       console.error('Error fetching graph data:', error);
     }
@@ -72,9 +68,7 @@ const App = () => {
 
   const fetchRestartedPods = async () => {
     const res = await fetch('http://127.0.0.1:3333/restarted');
-    console.log(res);
     const restartedPods = await res.json();
-    console.log(restartedPods);
     setRestartedPods(restartedPods);
   };
 
@@ -130,7 +124,6 @@ const App = () => {
         throw new Error('Failed to send configuration');
       }
       const result = await response.json();
-      console.log('Configuration saved successfully:', result);
       setSavedConfiguration({
         savedMemoryThreshold: result.memory.threshold,
         savedMemTimeFrame: result.memory.minutes,
@@ -146,15 +139,13 @@ const App = () => {
     }
   };
 
-  const manualGraphRefresh = () => {
+  const manualGraphRefresh = async () => {
     queryCpuData(cpuGraphMinutes);
-    queryMemoryData(memoryGraphMinutes);
+    await queryMemoryData(memoryGraphMinutes);
+    fetchRestartedPods();
   };
 
   const handleSubmit = () => {
-    console.log(`Memory: ${memory}, TimeFrame: ${memTimeFrame}`);
-    console.log(`CPU: ${cpu}, TimeFrame: ${cpuTimeFrame}`);
-    console.log({ memory, memTimeFrame, cpu, cpuTimeFrame });
     setConfiguration(memory, memTimeFrame, cpu, cpuTimeFrame);
   };
 

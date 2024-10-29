@@ -8,7 +8,7 @@ const {
   prometheusController,
 } = require('./controllers/prometheusController');
 
-const {configController} = require('./controllers/configController');
+const { configController } = require('./controllers/configController');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -24,7 +24,6 @@ app.get('/restarted', (req, res) => {
 });
 
 app.get('/graphData', prometheusController.fetchGraphData, (req, res) => {
-  console.log(res.locals.data);
   res.status(200).json(res.locals.data);
 });
 
@@ -45,7 +44,7 @@ app.use((err, req, res, next) => {
     },
   };
   const errObj = Object.assign({}, defaultErr, err);
-  console.log(errObj.log);
+  console.error(errObj.log);
   res.status(errObj.status).json(errObj.message);
 });
 
