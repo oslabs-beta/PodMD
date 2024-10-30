@@ -47,7 +47,7 @@ configController.saveConfig = (req, res, next) => {
       },
     };
 
-    prometheusQueries();
+    // prometheusQueries();
     return next();
   } catch (err) {
     return next(err);

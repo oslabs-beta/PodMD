@@ -29,6 +29,10 @@ a:hover {
   color: #535bf2;
 }
 
+.OuterContainer {
+  margin-top: 80px;
+}
+
 body {
   margin: 0;
   display: flex;
@@ -47,6 +51,8 @@ h2 {
   font-family: 'Aldrich', sans-serif;
   color: #adadad;
   padding: 3px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 h3 {
@@ -84,7 +90,14 @@ h4 {
   margin: 0;
 }
 
+canvas {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
 .sliderBox {
+  margin-top: 20px;
+  margin-left: 20px;
   padding: 5px;
   display: flex;
   flex-direction: column;
@@ -100,11 +113,11 @@ h4 {
 
 #paramBox {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
   border-radius: 8px;
-  width: 400px;
+  width: 470px;
   background-color: #363637;
   filter: drop-shadow(1px 1px 1px #1e1d1d);
 }
@@ -152,22 +165,27 @@ button:focus-visible {
 }
 
 #settingsCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: 0;
-  width: 400px;
+  width: 470px;
   border-radius: 8px;
   background-color: #363637;
   filter: drop-shadow(1px 1px 1px #1e1d1d);
 }
 
 #outerBox {
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
+  height: 300px;
 }
 
 #configButton {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-self: flex-end;
   padding: 20px;
 }
 
@@ -186,6 +204,7 @@ button:focus-visible {
   background-color: transparent;
   font-family: 'Aldrich', sans-serif;
   margin-left: 10px;
+  margin-right: 10px;
 }
 
 
@@ -207,8 +226,9 @@ button:focus-visible {
 .graphs {
   position: relative;
   width: 60em;
+  height: 620px;
   border-radius: 8px;
-  margin-top: 50px;
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -270,22 +290,27 @@ tr:nth-child(odd) {
 #innerGraphBox {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  width: 470px;
 }
 
 .sliderContainer {
-  position: relative; /* Change to relative */
-  width: 350px; /* Set a width */
-  height: 60px; /* Define a height */
+  position: relative;
+  width: 350px;
+  height: 60px;
   display: flex;
   align-items: center;
+  flex-direction: row-reverse;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .tabs {
   display: flex;
+  flex-shrink: 0;
   justify-content: space-between;
-  width: 100%;
-  position: relative;
+  min-width: 300px;
+  position: absolute;
   background: #242424;
   padding: 8px;
   border-radius: 40px;
@@ -293,7 +318,6 @@ tr:nth-child(odd) {
 }
 
 .tabs * {
-
   z-index: 4;
 }
 
@@ -303,10 +327,11 @@ tr:nth-child(odd) {
 
 .tab {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  height: 40px;
-  width: 75px;
+  min-height: 40px;
+  min-width: 75px;
   font-size: 14px;
   font-weight: 600;
   font-family: 'Aldrich', sans-serif;
@@ -324,21 +349,21 @@ input[id='radio-1']:checked ~ .graphSlider {
 }
 
 input[id='radio-2']:checked ~ .graphSlider {
-  transform: translateX(80px); /* Match with tab width */
+  transform: translateX(80px); 
 }
 
 input[id='radio-3']:checked ~ .graphSlider {
-  transform: translateX(160px); /* Match with tab width */
+  transform: translateX(160px); 
 }
 
 .graphSlider {
   position: relative;
   display: flex;
-  height: 40px; /* Adjust height */
-  width: 75px; /* Match with tab width */
+  height: 40px;
+  width: 75px; 
   background: #54abb4;
   z-index: 1;
-  border-radius: 40px; /* Adjusted for a smaller radius */
+  border-radius: 40px;
   transition: 0.25s ease-out;
 }
 
@@ -351,6 +376,10 @@ th {
   text-align: left;
 }
 
+.MuiTableContainer-root.settingContain {
+  color: red;
+}
+
 .MuiTableCell-root.MuiTableCell-head.tableHeader {
   font-family: 'Aldrich', sans-serif;
   font-size: 14px;
@@ -358,7 +387,16 @@ th {
   color: #adadad;
 }
 
-/* Style for individual header cells */
+.MuiButtonBase-root .MuiSvgIcon-root path {
+  stroke: #adadad;
+}
+
+.MuiButtonBase-root:focus,
+.MuiButtonBase-root:active path {
+  border: none;
+  outline: none;
+}
+
 #tblhd .MuiTableCell-root {
   padding: 5px;
   text-align: center;
