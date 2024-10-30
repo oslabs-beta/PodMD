@@ -1,4 +1,4 @@
-const prometheusQueries = require('../services/prometheusService');
+const { queryPrometheus } = require('../services/prometheusService');
 
 let config = {
   cpu: {
@@ -21,8 +21,13 @@ let config = {
   },
 };
 
+const updateQueries = () => {
+  queryPrometheus(config.cpu.queryString);
+  queryPrometheus(config.memory.queryString);
+};
+
 const configController = {};
-configController.saveConfig = (req, res, next) => {
+configController.saveConfig = async (req, res, next) => {
   try {
     const { memory, memTimeFrame, cpu, cpuTimeFrame } = req.body;
 
@@ -46,8 +51,7 @@ configController.saveConfig = (req, res, next) => {
         minutes: config.memory.minutes,
       },
     };
-
-    // prometheusQueries();
+    await updateQueries();
     return next();
   } catch (err) {
     return next(err);
