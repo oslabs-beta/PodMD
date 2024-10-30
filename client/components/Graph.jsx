@@ -105,12 +105,12 @@ const Graph = ({
   }, [data, title]);
 
   return (
-    <div>
+    <div id='innerGraphBox'>
       <h2 variant='h5'>{`Average ${title}`}</h2>
       <div className='sliderContainer'>
         <div className='tabs'>
           {[1440, 60, 10].map((mins) => (
-            <div key={mins}>
+            <div id='tab' key={mins}>
               <input
                 className='radio'
                 type='radio'
@@ -128,10 +128,11 @@ const Graph = ({
                   ? '24 Hours'
                   : mins === 60
                   ? '1 Hour'
-                  : '10 Minutes'}
+                  : '10 Min'}
               </label>
             </div>
           ))}
+        </div>
           <span
             className='graphSlider'
             style={{
@@ -139,16 +140,15 @@ const Graph = ({
                 (title === 'CPU Usage'
                   ? cpuGraphMinutes
                   : memoryGraphMinutes) === 1440
-                  ? 0
+                  ? -150
                   : (title === 'CPU Usage'
                       ? cpuGraphMinutes
                       : memoryGraphMinutes) === 60
-                  ? 100
-                  : 200
+                  ? 0
+                  : 150
               }%)`,
             }}
           ></span>
-        </div>
       </div>
       <Typography variant='subtitle1'>{graphTitleDisplay}</Typography>
       <canvas ref={chartRef} width='400' height='400'></canvas>
