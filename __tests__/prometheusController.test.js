@@ -9,7 +9,7 @@ const deletePod = require('../server/controllers/kubeController');
 
 jest.mock('../server/services/prometheusService', () => ({
   queryPrometheus: jest.fn(),
-  runDemo: true,
+  runDemo: false,
 }));
 
 jest.mock('../server/controllers/kubeController', () => jest.fn());
