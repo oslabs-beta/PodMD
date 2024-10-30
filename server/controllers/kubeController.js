@@ -24,4 +24,4 @@ async function deletePod(podName, podNamespace) {
   }
 }
 
-module.exports = { deletePod };
+module.exports = deletePod;

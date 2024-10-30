@@ -31,7 +31,6 @@ prometheusController.fetchGraphData = async (req, res, next) => {
       memData = await queryPrometheus(memQuery, config.memory.threshold);
       res.locals.data = { memData };
     }
-
     return next();
   } catch (err) {
     return next(err);

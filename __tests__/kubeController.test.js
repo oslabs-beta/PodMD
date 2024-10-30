@@ -1,4 +1,4 @@
-const { deletePod } = require('../server/controllers/kubeController');
+const deletePod = require('../server/controllers/kubeController');
 const k8s = require('@kubernetes/client-node');
 
 jest.mock('@kubernetes/client-node', () => {
