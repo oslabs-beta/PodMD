@@ -12,7 +12,7 @@ export default function TimeToolTip() {
   return (
     <Tooltip title={timeDescription}>
       <IconButton>
-        <QuestionMarkIcon sx={{color: '#adadad', fontSize: 'small'}} />
+        <QuestionMarkIcon sx={{color: '#adadad', fontSize: 'small', border: 'none', stroke: 'none'}} />
       </IconButton>
     </Tooltip>
   );

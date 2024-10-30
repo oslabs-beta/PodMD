@@ -17,7 +17,7 @@ const App = () => {
     savedCpuThreshold: 80,
     savedCpuTimeFrame: 30,
   });
-
+  
   const [memoryData, setMemoryData] = useState([]);
   const [cpuData, setCpuData] = useState([]);
   const [cpuGraphMinutes, setCpuGraphMinutes] = useState(60);
@@ -146,7 +146,7 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className='OuterContainer'>
       <Navbar />
       <ParameterContainer
         handleSubmit={handleSubmit}
