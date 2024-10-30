@@ -8,8 +8,13 @@ const callInterval = 0.3;
 const restartedPods = [];
 
 const prometheusController = {};
+
 prometheusController.fetchGraphData = async (req, res, next) => {
   try {
+    if (runDemo) {
+      checkRestart(config.cpu);
+      checkRestart(config.memory);
+    }
     const cpuGraphMinutes = req.query.cpuGraphMinutes;
     const memoryGraphMinutes = req.query.memoryGraphMinutes;
 
@@ -31,6 +36,7 @@ prometheusController.fetchGraphData = async (req, res, next) => {
       memData = await queryPrometheus(memQuery, config.memory.threshold);
       res.locals.data = { memData };
     }
+
     return next();
   } catch (err) {
     return next(err);
