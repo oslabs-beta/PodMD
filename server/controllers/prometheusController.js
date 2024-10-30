@@ -8,13 +8,8 @@ const callInterval = 0.3;
 const restartedPods = [];
 
 const prometheusController = {};
-
 prometheusController.fetchGraphData = async (req, res, next) => {
   try {
-    if (runDemo) {
-      await checkRestart(config.cpu);
-      await checkRestart(config.memory);
-    }
     const cpuGraphMinutes = req.query.cpuGraphMinutes;
     const memoryGraphMinutes = req.query.memoryGraphMinutes;
 
@@ -29,14 +24,13 @@ prometheusController.fetchGraphData = async (req, res, next) => {
       res.locals.data = { cpuData };
     }
     if (memoryGraphMinutes) {
-      const memQuery = `sum(avg_over_time(container_memory_usage_bytes[${memoryGraphMinutes}m])) by (pod, namespace)
-    /
-    sum(kube_pod_container_resource_requests{resource="memory"}) by (pod, namespace) * 100
-    `;
+      const memQuery = `
+      sum(avg_over_time(container_memory_usage_bytes[${memoryGraphMinutes}m])) by (pod, namespace) /
+      sum(kube_pod_container_resource_requests{resource="memory"}) by (pod, namespace) * 100
+      `;
       memData = await queryPrometheus(memQuery, config.memory.threshold);
       res.locals.data = { memData };
     }
-
     return next();
   } catch (err) {
     return next(err);
@@ -74,4 +68,4 @@ const restartChecks = async (config) => {
   await Promise.all([checkRestart(config.cpu), checkRestart(config.memory)]);
 };
 setInterval(() => restartChecks(config), 1000 * 60 * callInterval);
-module.exports = { restartedPods, prometheusController };
+module.exports = { restartedPods, prometheusController, checkRestart };

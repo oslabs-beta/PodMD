@@ -30,7 +30,6 @@ const configController = {};
 configController.saveConfig = async (req, res, next) => {
   try {
     const { memory, memTimeFrame, cpu, cpuTimeFrame } = req.body;
-
     config.cpu.threshold = cpu;
     config.cpu.minutes = cpuTimeFrame;
     config.cpu.queryString = `
