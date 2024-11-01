@@ -1,10 +1,10 @@
 const {
   config,
   configController,
-} = require('../server/controllers/configController'); // Adjust path as needed
+} = require('../server/controllers/configController');
 const { queryPrometheus } = require('../server/services/prometheusService');
 
-// Mock the queryPrometheus function
+
 jest.mock('../server/services/prometheusService', () => ({
   queryPrometheus: jest.fn(),
 }));
@@ -29,13 +29,11 @@ describe('configController.saveConfig', () => {
   test('should update config and call queryPrometheus with new queries', async () => {
     await configController.saveConfig(req, res, next);
 
-    // Check that config values have been updated
     expect(config.cpu.threshold).toBe(85);
     expect(config.cpu.minutes).toBe(15);
     expect(config.memory.threshold).toBe(75);
     expect(config.memory.minutes).toBe(20);
 
-    // Check if queryPrometheus was called with the updated query strings
     expect(queryPrometheus).toHaveBeenCalledWith(
       expect.stringContaining('[15m]')
     );
@@ -43,13 +41,11 @@ describe('configController.saveConfig', () => {
       expect.stringContaining('[20m]')
     );
 
-    // Check if res.locals.savedConfig is set correctly
     expect(res.locals.savedConfig).toEqual({
       cpu: { threshold: 85, minutes: 15 },
       memory: { threshold: 75, minutes: 20 },
     });
 
-    // Verify that next was called
     expect(next).toHaveBeenCalled();
   });
 
@@ -61,7 +57,6 @@ describe('configController.saveConfig', () => {
 
     await configController.saveConfig(req, res, next);
 
-    // Check if next was called with the error
     expect(next).toHaveBeenCalledWith(error);
   });
 });
