@@ -17,7 +17,7 @@ module.exports = {
     process.env.NODE_ENV === 'production' ? 'source-map' : 'eval-source-map',
   devServer: {
     compress: false,
-    host: '0.0.0.0',
+    host: 'localhost',
     port: 8080,
     hot: true,
     static: {

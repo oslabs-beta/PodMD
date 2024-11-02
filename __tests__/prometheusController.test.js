@@ -17,7 +17,7 @@ jest.mock('../server/controllers/kubeController', () => jest.fn());
 describe('Prometheus Controller', () => {
   afterEach(() => {
     jest.clearAllMocks();
-    restartedPods.length = 0; // Clear restartedPods array after each test
+    restartedPods.length = 0;
   });
 
   describe('fetchGraphData', () => {
@@ -84,7 +84,7 @@ describe('Prometheus Controller', () => {
         result: [
           {
             metric: { pod: 'test-pod', namespace: 'default' },
-            value: [null, '85'], // Value above threshold for triggering restart
+            value: [null, '85'],
           },
         ],
       },
@@ -114,7 +114,7 @@ describe('Prometheus Controller', () => {
           result: [
             {
               metric: { pod: 'low-pod', namespace: 'default' },
-              value: [null, '75'], // Below threshold value
+              value: [null, '75'],
             },
           ],
         },
