@@ -16,7 +16,7 @@ function Navbar() {
             backgroundColor: '#242424',
             borderRadius: '8px',
           }}>
-          <div>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <img
               src={logo}
               alt='PodMD Logo'
@@ -36,7 +36,7 @@ function Navbar() {
               style={{
                 width: '100px',
                 height: 'auto',
-                margin: '0.5rem 0.5rem',
+                marginBottom: '0',
                 transition: 'filter 0.3s',
                 filter: 'grayscale(10%)',
               }}
