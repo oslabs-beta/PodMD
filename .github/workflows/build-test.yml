@@ -1,0 +1,12 @@
+name: 'build-tests'
+on:
+  pull_request:
+    branches:
+      - 'dev'
+jobs: 
+  unit-testing:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: 'actions/checkout@v4'
+      - run: 'npm install jest'
+      - run: 'npm run test'
