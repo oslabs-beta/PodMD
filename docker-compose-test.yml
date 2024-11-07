@@ -1,11 +1,14 @@
-# Replace '#' with your preferences.
-
 services:
-  dev:
-    image: # 
-    container_name: #
-    ports: #
-    volumes: [ ./:/usr/src/app, node_modules:/usr/src/app/node_modules ]
-    command: #
+  test:
+    depends_on: [generic-test]
+    image: podmdImage
+    container_name: podmd-test
+    ports: [3000:3000]
+    volumes: [./:/user/src/app, node_modules:/user/src/app/node_modules]
+    command: npm run test
+  generic-test:
+    image: podmdImage
+    container_name: podmd-test
 volumes:
   node_modules:
+  test-db-volume:
