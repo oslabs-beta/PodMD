@@ -1,0 +1,11 @@
+name: 'build-tests'
+on:
+  pull_request:
+    branches:
+      - 'main'
+jobs: 
+  unit-testing:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: 'actions/checkout@v4'
+      - run: 'docker compose -f docker-compose-test.yml up --abort-on-container-exit'
